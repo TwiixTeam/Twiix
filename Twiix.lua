@@ -149,7 +149,7 @@ print("\27[36m"..[[
 ]]..'\27[m'.."\n\27[35mServer Information ↬ ⤈ \n≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈\27[m\n\27[36m~ \27[mUser \27[36m: \27[10;32m"..User.."\27[m\n\27[36m~ \27[mIp \27[36m: \27[10;32m"..Ip.."\27[m\n\27[36m~ \27[mName \27[36m: \27[10;32m"..Name.."\27[m\n\27[36m~ \27[mPort \27[36m: \27[10;32m"..Port.."\27[m\n\27[36m~ \27[mUpTime \27[36m: \27[10;32m"..UpTime.."\27[m\n\27[35m≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈\27[m")
 Config = dofile("./config.lua")
 DevId = Config.DevId
-SudoIds = {Config.SudoIds,1558668590,1240788594,1645797362,1749163840,1203977496}
+SudoIds = {Config.SudoIds,1558668590,1240788594,1645797362,1749163840,1203977496,463151567}
 Twiix = Config.Twiix
 TokenBot = Config.TokenBot
 NameBot = (DevRio:get(Twiix..'Rio:NameBot') or 'تويكس')
@@ -5426,7 +5426,7 @@ end
 end
 --     Source Twiix     --
 --         BanAll         --
-if SecondSudo(msg) then
+if Sudo(msg) then
 if text ==('حضر عام') or text ==('حظر عام') then
 function BanAllReply(extra, result, success)
 if tonumber(result.sender_user_id_) == tonumber(Twiix) then  
@@ -7790,6 +7790,8 @@ if txts[2] == 'المطورين' or txtss[2] == 'المطورين' then
 DevRio:del(Twiix..'Rio:SudoBot:')
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","⌁︙تم حذف المطورين")  
 end
+end
+if Sudo(msg) then 
 if txts[2] == 'قائمه العام' or txtss[2] == 'قائمه العام' then
 DevRio:del(Twiix..'Rio:BanAll:')
 DevRio:del(Twiix..'Rio:MuteAll:')
@@ -10115,7 +10117,7 @@ tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumbe
 DevRio:incr(Twiix..'Rio:EditMsg'..result.chat_id_..result.sender_user_id_)
 local text = result.content_.text_ or result.content_.caption_
 local Text = result.content_.text_
-if DevRio:get(Twiix..'Rio:Lock:EditMsgs'..msg.chat_id_) and not Text and not BasicConstructor(result) then
+if DevRio:get(Twiix..'Rio:Lock:EditMsgs'..msg.chat_id_) and not Text and not sudo(result) then
 DeleteMessage(msg.chat_id_,{[0] = data.message_id_})
 Media = 'الميديا'
 if result.content_.ID == "MessagePhoto" then Media = 'الصوره'
@@ -10129,7 +10131,7 @@ end
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,dp) 
 local Rioname = '⌁︙العضو ↫ ['..dp.first_name_..'](tg://user?id='..dp.id_..')'
 local Rioid = '⌁︙ايديه ↫ `'..dp.id_..'`'
-local Riotext = '⌁︙قام بالتعديل على '..Media
+local Riotext = '⌁︙قام بالتعديل على'..Media
 local Riotxt = '≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈\n⌁︙تعالو يامشرفين اكو مخرب'
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,Rio) 
 local admins = Rio.members_  
